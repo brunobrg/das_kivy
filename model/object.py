@@ -1,4 +1,5 @@
 from abc import ABCMeta
+import os
 class Object(metaclass=ABCMeta):
 
     id_iterator = 0
@@ -36,6 +37,22 @@ class Directory(Object):
         super().__init__(path + '/', parent_directory)
         self.administrator = administrator
         self.containing_objects = []
+
+    def update_directory(self):
+        cont_obj = []
+        for obj in self.containing_objects:
+            cont_obj.append(obj.name)
+        for path in os.listdir(self._real_path):
+            if path not in cont_obj:
+                self.add_object(self._real_path + path)
+
+    def add_object(self, path):
+        new_object = None
+        if os.path.isdir(path):
+            obj = Directory(path, self, self.administrator)
+            obj.update_directory()
+        else:
+            obj = File(path, self)
 
     def __repr__(self):
         return "<Directory:" + self.path + ">"

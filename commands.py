@@ -13,11 +13,12 @@ class Login(LoginCommand):
         self.execute()
 
     def run(self):
-        for user in User.users:
-            if user.username == self.username and user.password == self.password:
-                Session.current_user = user
-                OpenObject(Session.current_user, settings.rootdir)
-                return True
+        if not Session.current_user:
+            for user in User.users:
+                if user.username == self.username and user.password == self.password:
+                    Session.current_user = user
+                    OpenObject(Session.current_user, settings.rootdir)
+                    return True
         return False
 
     def success(self):
@@ -26,7 +27,10 @@ class Login(LoginCommand):
         print("Welcome " + self.user.username + ".")
 
     def fail(self):
-        print("Login invalido.")
+        if Session.current_user:
+            print("Invalid Action, logout before logging in again.")
+        else:
+            print("Login invalido.")
 
 ###### User Commands
 
