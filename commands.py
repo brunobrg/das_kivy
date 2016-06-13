@@ -7,12 +7,16 @@ import os
 class Login(LoginCommand):
     def __init__(self, username, password):
         super().__init__('Login', None, username, password)
+        self()
+
+    def __call__(self):
+        self.execute()
 
     def run(self):
         for user in User.users:
             if user.username == self.username and user.password == self.password:
                 Session.current_user = user
-                OpenObject(Session.current_user, settings.rootdir).execute()
+                OpenObject(Session.current_user, settings.rootdir)
                 return True
         return False
 
@@ -29,6 +33,10 @@ class Login(LoginCommand):
 class Logout(UserCommand):
     def __init__(self, user):
         super().__init__('Logout', user)
+        self()
+
+    def __call__(self):
+        self.execute()
 
     def run(self):
         if self.user:
@@ -45,6 +53,10 @@ class Logout(UserCommand):
 class MyInformation(UserCommand):
     def __init__(self, user):
         super().__init__('MyInformation', user)
+        self()
+
+    def __call__(self):
+        self.execute()
 
     def run(self):
         if self.user:
@@ -62,6 +74,10 @@ class MyInformation(UserCommand):
 class OpenObject(ObjectCommand):
     def __init__(self, user, obj):
         super().__init__('OpenObject', user, obj)
+        self()
+
+    def __call__(self):
+        self.execute()
 
     def run (self):
         Session.current_directory = self.object
@@ -72,6 +88,10 @@ class OpenObject(ObjectCommand):
 class ShowDirectory(ObjectCommand):
     def __init__(self, user, obj):
         super().__init__('ShowDirectory', user, obj)
+        self()
+
+    def __call__(self):
+        self.execute()
 
     def run (self):
         print(os.listdir(self.object._real_path))
