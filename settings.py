@@ -8,8 +8,8 @@ from commands import *
 admin_user = User("admin", "12345")
 admin_role = Administrator()
 admin_assign = Assignment(admin_user, admin_role)
-rootpath = "/home/gagos/unb/git/das/rbac_python/objects/organization"
+rootpath = "/home/gagos/unb/git/das/das_ep0/objects/organization"
 rootdir = Directory(rootpath, None, admin_role)
 admin_privilege = Privilege(admin_role, rootdir)
 admin_privilege.add_command('OpenObject')
-admin_privilege.add_command('ShowCurrentDirectory')
+admin_privilege.add_command('ShowDirectory')
