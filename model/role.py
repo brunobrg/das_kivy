@@ -9,6 +9,14 @@ class Role(metaclass=ABCMeta):
         self.privileges = []
         self.assignments = []
 
+    def has_privilege(self, obj, command):
+        for privilege in self.privileges:
+            if privilege.has_privilege(obj, command):
+                return True
+        return False
+
+    def __repr__(self):
+        return "<Role:" + self.name + ">"
 
 class Administrator(Role):
 

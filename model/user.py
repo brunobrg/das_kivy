@@ -9,3 +9,12 @@ class User:
         self.password = password
         self.assignments = []
         self.__class__.users.append(self)
+
+    def has_privilege(self, obj, command):
+        for assign in self.assignments:
+            if assign.has_privilege(obj, command):
+                return True
+        return False
+
+    def __repr__(self):
+        return "<User:" + self.username + ">"

@@ -37,6 +37,9 @@ class Directory(Object):
         self.administrator = administrator
         self.containing_objects = []
 
+    def __repr__(self):
+        return "<Directory:" + self.path + ">"
+
 class File(Object):
 
     def __init__(self, path, parent_directory):
@@ -44,3 +47,6 @@ class File(Object):
 
     def information(self):
         return self.name
+
+    def __repr__(self):
+        return "<File:" + self.path + ">"

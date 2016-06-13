@@ -7,4 +7,19 @@ class Privilege:
         self.id = self.__class__.id_iterator + 1
         self.role = role
         self.object = new_object
-        self.__class__privileges.append(self)
+        self.commands = []
+
+        self.role.privileges.append(self)
+        self.__class__.privileges.append(self)
+
+    def has_privilege(self, obj, command):
+        if self.object == obj:
+            if command.name in self.commands:
+                return True
+        return False
+
+    def add_command(self, command):
+        self.commands.append(command)
+
+    def __repr__(self):
+        return "<Privilege:<" + str(self.role) + ":" + str(self.object) + ">>"
