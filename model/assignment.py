@@ -7,4 +7,7 @@ class Assignment:
         self.id = self.__class__.id_iterator + 1
         self.user = user
         self.role = role
+        
+        self.user.assignments.append(self)
+        self.role.assignments.append(self)
         self.__class__.assignments.append(self)

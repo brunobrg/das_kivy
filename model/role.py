@@ -9,6 +9,7 @@ class Role(metaclass=ABCMeta):
         self.privileges = []
         self.assignments = []
 
+
 class Administrator(Role):
 
     def __init__(self):

@@ -5,11 +5,12 @@ class Object(metaclass=ABCMeta):
     objects = []
 
     def __init__(self, real_path, parent_directory):
-        self.id = self.__clas__.id_iterator + 1
+        self.id = self.__class__.id_iterator + 1
         self._real_path = real_path
         self.parent_directory = parent_directory
         self.path = self.get_path_from_real_path()
         self.name = self.get_name_from_path()
+        self.add_to_parent();
         self.__class__.objects.append(self)
 
     def get_name_from_path(self):
@@ -24,6 +25,17 @@ class Object(metaclass=ABCMeta):
 
     def get_type(self):
         return 'directory' if os.path.isdir(self._real_path) else 'file'
+
+    def add_to_parent(self):
+        if self.parent_directory != None:
+            self.parent_directory.containing_objects.append(self)
+
+
+class Directory(Object):
+    def __init__(self, path, parent_directory, administrator):
+        super().__init__(path + '/', parent_directory)
+        self.administrator = administrator
+        self.containing_objects = []
 
 class File(Object):
 

@@ -5,3 +5,5 @@ if __name__ == "__main__":
     from model.object import *
     from model.privilege import *
     from model.role import *
+
+    import settings
