@@ -27,8 +27,12 @@ class Command(metaclass=ABCMeta):
         if self.has_privilege():
             self.success()
             self.run()
+            self.user.command_log.append(self)
         else:
             self.fail()
 
     def fail(self):
         print ("You can not " + self.name)
+
+    def __repr__(self):
+        return "<<Command:" + self.name + ">:" + self.executed_date + ">"

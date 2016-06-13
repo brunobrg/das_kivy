@@ -8,6 +8,7 @@ class User:
         self.username = name
         self.password = password
         self.assignments = []
+        self.command_log = []
         self.__class__.users.append(self)
 
     def has_privilege(self, obj, command):

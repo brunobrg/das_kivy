@@ -12,3 +12,4 @@ rootpath = "/home/gagos/unb/git/das/rbac_python/objects/organization"
 rootdir = Directory(rootpath, None, admin_role)
 admin_privilege = Privilege(admin_role, rootdir)
 admin_privilege.add_command('OpenObject')
+admin_privilege.add_command('ShowCurrentDirectory')
