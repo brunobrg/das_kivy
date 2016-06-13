@@ -24,6 +24,9 @@ class Administrator(Role):
         super().__init__("Administrator")
         self.sub_roles = []
 
+    def add_sub_role(self, sub_role):
+        self.sub_roles.append(sub_role)
+        
 class SubRole(Role):
 
     def __init__(self, name):

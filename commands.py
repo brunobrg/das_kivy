@@ -5,6 +5,7 @@ import settings
 import os
 
 class Login(LoginCommand):
+
     def __init__(self, username, password):
         super().__init__('Login', None, username, password)
         self()
@@ -35,6 +36,7 @@ class Login(LoginCommand):
 ###### User Commands
 
 class Logout(UserCommand):
+
     def __init__(self, user):
         super().__init__('Logout', user)
         self()
@@ -55,6 +57,7 @@ class Logout(UserCommand):
 
 
 class MyInformation(UserCommand):
+
     def __init__(self, user):
         super().__init__('MyInformation', user)
         self()
@@ -76,6 +79,7 @@ class MyInformation(UserCommand):
 ###### Object Commands
 
 class OpenObject(ObjectCommand):
+
     def __init__(self, user, obj):
         super().__init__('OpenObject', user, obj)
         self()
@@ -83,13 +87,14 @@ class OpenObject(ObjectCommand):
     def __call__(self):
         self.execute()
 
-    def run (self):
+    def run(self):
         Session.current_directory = self.object
 
-    def success (self):
+    def success(self):
         print("Opening " + str(self.object))
 
 class ShowDirectory(ObjectCommand):
+
     def __init__(self, user, obj):
         super().__init__('ShowDirectory', user, obj)
         self()
@@ -97,8 +102,25 @@ class ShowDirectory(ObjectCommand):
     def __call__(self):
         self.execute()
 
-    def run (self):
+    def run(self):
         print(os.listdir(self.object._real_path))
 
-    def success (self):
+    def success(self):
         print("Showing " + str(self.object) + " objects")
+
+class CreateNewRole(ObjectCommand):
+
+    def __init__(self, user, obj, role_name):
+        super().__init__('CreateNewRole', user, obj)
+        self.role_name = role_name
+        self()
+
+    def __call__(self):
+        self.execute()
+
+    def run(self):
+        sub_role = SubRole(self.role_name)
+        self.object.add_sub_role(sub_role)
+
+    def success(self):
+        print("Role " + self.role + " created for " + str(self.object))

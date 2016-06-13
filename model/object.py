@@ -1,5 +1,5 @@
 from abc import ABCMeta
-import os
+import os, copy
 class Object(metaclass=ABCMeta):
 
     id_iterator = 0
@@ -49,10 +49,14 @@ class Directory(Object):
     def add_object(self, path):
         new_object = None
         if os.path.isdir(path):
-            obj = Directory(path, self, self.administrator)
+            new_adm = copy.deepcopy(self.administrator)
+            obj = Directory(path, self, new_adm)
             obj.update_directory()
         else:
             obj = File(path, self)
+
+    def add_sub_role(self, sub_role):
+        self.administrator.add_sub_role(new_role)
 
     def __repr__(self):
         return "<Directory:" + self.path + ">"
