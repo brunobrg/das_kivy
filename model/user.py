@@ -7,4 +7,5 @@ class User:
         self.id = self.__class__.id_iterator + 1
         self.username = name
         self.password = password
+        self.assignments = []
         self.__class__.users.append(self)
