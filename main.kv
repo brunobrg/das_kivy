@@ -1,0 +1,14 @@
+#:kivy 1.9.1
+#: import Transition kivy.uix.screenmanager.NoTransition
+
+<ScreenManagement>:
+    id: screen_manager
+
+    transition: Transition()
+
+    login_screen: login_screen
+
+    LoginScreen:
+        id: login_screen
+        name: 'login'
+        manager: screen_manager

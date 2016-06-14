@@ -1,0 +1,46 @@
+#: kivy 1.9.1
+#: import Transition kivy.uix.screenmanager.NoTransition
+
+<LoginScreen>:
+    BoxLayout:
+        id: login_layout
+        orientation: 'vertical'
+        padding: [150, 100, 150, 100]
+        spacing: 30
+
+        Label:
+            text: 'Welcome'
+            font_size: 32
+
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Login'
+                font_size: 18
+                halign: 'left'
+                text_size: root.width-300, 20
+            TextInput:
+                id: login
+                multiline: False
+                font_size: 28
+
+
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Password'
+                halign: 'left'
+                font_size: 18
+                text_size: root.width-300, 20
+
+            TextInput:
+                id: login
+                multiline: False
+                font_size: 28
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: [160, 20, 160, 20]
+            Button:
+                text: 'LOGIN'
+                font_size: 24

@@ -1,0 +1,26 @@
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+ScreenManagement:
+    transition: FadeTransition()
+    MainScreen:
+    AnotherScreen:
+
+<MainScreen>:
+    name: 'main'
+    Button:
+        on_release: app.root.current = 'other'
+        text: 'Another Screen'
+        font_size: 50
+
+<AnotherScreen>:
+    name: 'other'
+
+    FloatLayout:
+        Painter
+        Button:
+            color: 0, 1, 0, 1
+            font_size: 20
+            size_hint: 0.15, 0.15
+            text: "Back Home"
+            on_release: app.root.current = "main"
+            pos_hint: {"left":1, "bottom":1}

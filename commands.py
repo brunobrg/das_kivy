@@ -1,6 +1,6 @@
 from model.command import *
 from model.user import User
-from session import *
+from controller.session import *
 import settings
 import os
 
