@@ -1,4 +1,5 @@
 from abc import ABCMeta
+import copy
 class Role(metaclass=ABCMeta):
 
     id_iterator = 0
@@ -26,7 +27,12 @@ class Administrator(Role):
 
     def add_sub_role(self, sub_role):
         self.sub_roles.append(sub_role)
-        
+
+    def add_privilege(self, obj):
+        new_privilege = copy.copy(self.privileges[0])
+        new_privilege.update_privilege(obj)
+        self.privileges.append(new_privilege)
+
 class SubRole(Role):
 
     def __init__(self, name):

@@ -14,10 +14,14 @@ class Directory(Button):
 
     def click(self):
         app = App.get_running_app()
+        self.clear_widgets()
         OpenObject(app.session.user, self.obj).execute()
 
 
 class DirectoryScreen(Screen):
+    def __init__(self, **kwargs):
+        super(DirectoryScreen, self).__init__(**kwargs)
+
     def update(self):
         app = App.get_running_app()
         stack = StackLayout(orientation='lr-tb', spacing=[10,10])
@@ -34,40 +38,8 @@ class OpenObject(ObjectCommand):
     def run(self):
         app = App.get_running_app()
         app.session.directory = self.object
-        app.root.current = 'directory_screen'
+        app.root.add_widget(DirectoryScreen(name='%s' % self.object.path))
+        app.root.current = self.object.path
 
     def success(self):
         print("Opening " + str(self.object))
-
-# class ShowDirectory(ObjectCommand):
-#
-#     def __init__(self, user, obj):
-#         super().__init__('ShowDirectory', user, obj)
-#
-#     def run(self):
-#         print(os.listdir(self.object._real_path))
-#
-#     def success(self):
-#         print("Showing " + str(self.object) + " objects")
-
-# class Login(LoginCommand):
-#     def __init__(self, username, password):
-#         super().__init__('Login', None, username, password)
-#
-#     def run(self):
-#         for user in User.users:
-#             if user.username == self.username and user.password == self.password:
-#                 app = App.get_running_app()
-#                 app.session.user = user
-#                 self.user = app.session.user
-#                 return True
-#         return False
-#
-#     def success(self):
-#         self.user.command_log.append(self)
-#         print("Welcome " + self.user.username + ".")
-#         return True
-#
-#     def fail(self):
-#         print("Login invalido.")
-#         return False

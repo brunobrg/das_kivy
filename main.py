@@ -17,7 +17,6 @@ presentation = Builder.load_file("view/main.kv")
 
 class ScreenManagement(ScreenManager):
     main_screen = ObjectProperty(None)
-    directory_screen = ObjectProperty(None)
 
 class MainScreen(Screen):
     pass

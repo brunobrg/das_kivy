@@ -1,6 +1,5 @@
 from abc import ABCMeta
 import os, copy
-from .privilege import Privilege
 class Object(metaclass=ABCMeta):
 
     id_iterator = 0
@@ -50,8 +49,8 @@ class Directory(Object):
     def add_object(self, path):
         new_object = None
         if os.path.isdir(path):
-            new_adm = copy.deepcopy(self.administrator)
-            obj = Directory(path, self, new_adm)
+            obj = Directory(path, self, self.administrator)
+            self.administrator.add_privilege(obj)
             obj.update_directory()
         else:
             obj = File(path, self)

@@ -13,7 +13,6 @@ class Privilege:
         self.__class__.privileges.append(self)
 
     def has_privilege(self, obj, command):
-        print("ENTROU AQUI")
         if self.object == obj:
             if command.name in self.commands:
                 return True
@@ -21,6 +20,9 @@ class Privilege:
 
     def add_command(self, command):
         self.commands.append(command)
+
+    def update_privilege(self, obj):
+        self.object = obj
 
     def __repr__(self):
         return "<Privilege:<" + str(self.role) + ":" + str(self.object) + ">>"
