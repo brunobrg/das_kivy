@@ -4,7 +4,48 @@
 
 <DirectoryScreen>:
     on_enter: root.update()
+    on_leave: root.destroy()
+    id: self.id
+    BoxLayout:
+        id: box_v
+        orientation: 'vertical'
+        AnchorLayout:
+            size_hint: 1, 0.2
+            canvas:
+                Color:
+                    rgba: 0,0,0,1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            BoxLayout:
+                id: box_h
+                orientation: 'horizontal'
+                padding:[5,20]
 
-<Directory>:
+                Object:
+                    id: Back
+                    obj: app.session.directory.parent_directory
+                    text: "Retornar"
+                    size_hint: 0.25, 1
+                    on_press: self.click()
+
+                Label:
+                    size_hint: 0.5, 1
+                    text: app.session.directory.path
+                    font_size: 24
+
+                Label:
+                    size_hint: 0.25, 1
+
+        StackLayout:
+            id: stack
+            orientation:'lr-tb'
+            padding: [5,5]
+            spacing: 10
+
+
+
+<Object>:
     obj: self.obj
-    on_press: self.click()
+    on_press:
+        self.click()
