@@ -1,0 +1,38 @@
+#: kivy 1.9.1
+#: import Transition kivy.uix.screenmanager.NoTransition
+
+<ScreenManagement>:
+    id: screen_manager
+
+    transition: Transition()
+
+    main_screen: main_screen
+    directory_screen: directory_screen
+
+    MainScreen:
+        id: main_screen
+        name: 'main screen'
+        manager: screen_manager
+
+    DirectoryScreen:
+        id: directory_screen
+        name: 'directory_screen'
+        manager: screen_manager
+
+<MainScreen>:
+    canvas:
+        Color:
+            rgba: 1,1,1,1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    AnchorLayout:
+        size_hint: 0.8, 0.5
+        pos: (self.parent.width-self.width)/2, (self.parent.height-self.height)/2
+        canvas:
+            Color:
+                rgba: 0,0,0,1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        LoginScreen

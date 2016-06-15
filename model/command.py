@@ -40,12 +40,16 @@ class ObjectCommand(Command, metaclass=ABCMeta):
         return self.user.has_privilege(self.object, self)
 
     def execute(self):
+        retorno = False
         if self.has_privilege():
             self.success()
             self.run()
             self.user.command_log.append(self)
+            retorno = True
         else:
             self.fail()
+
+        return retorno
 
     @abstractmethod
     def run(self):
@@ -66,7 +70,7 @@ class LoginCommand(Command, metaclass=ABCMeta):
         self.password = password
 
     def execute(self):
-        self.success() if self.run() else self.fail()
+        return self.success() if self.run() else self.fail()
 
     @abstractmethod
     def run():

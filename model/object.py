@@ -1,5 +1,6 @@
 from abc import ABCMeta
 import os, copy
+from .privilege import Privilege
 class Object(metaclass=ABCMeta):
 
     id_iterator = 0

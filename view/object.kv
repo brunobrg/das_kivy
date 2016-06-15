@@ -1,0 +1,19 @@
+#: kivy 1.9.1
+#: import Transition kivy.uix.screenmanager.NoTransition
+
+
+<DirectoryScreen>:
+    on_enter: root.update()
+    BoxLayout:
+        id: directory_layout
+        orientation: 'vertical'
+        padding: [150, 100, 150, 100]
+        spacing: 30
+
+        Label:
+            text: 'DirectoryScreen'
+            font_size: 32
+
+<Directory>:
+    obj: self.obj
+    on_press: self.click()

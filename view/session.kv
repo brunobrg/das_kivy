@@ -5,7 +5,7 @@
     BoxLayout:
         id: login_layout
         orientation: 'vertical'
-        padding: [150, 100, 150, 100]
+        padding: [150, 0, 150, 0]
         spacing: 30
 
         Label:
@@ -22,7 +22,7 @@
             TextInput:
                 id: login
                 multiline: False
-                font_size: 28
+                font_size: 14
 
 
         BoxLayout:
@@ -34,13 +34,15 @@
                 text_size: root.width-300, 20
 
             TextInput:
-                id: login
+                id: password
+                password: True
                 multiline: False
-                font_size: 28
+                font_size: 14
 
         BoxLayout:
             orientation: 'vertical'
-            padding: [160, 20, 160, 20]
+            padding: [80, 0, 80, 20]
             Button:
                 text: 'LOGIN'
                 font_size: 24
+                on_release: root.login(login.text, password.text)

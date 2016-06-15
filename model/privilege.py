@@ -13,6 +13,7 @@ class Privilege:
         self.__class__.privileges.append(self)
 
     def has_privilege(self, obj, command):
+        print("ENTROU AQUI")
         if self.object == obj:
             if command.name in self.commands:
                 return True
