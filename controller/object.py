@@ -16,6 +16,14 @@ class Object(Button):
     def __init__(self, **kwargs):
         super(Object, self).__init__(**kwargs)
 
+    def on_touch_down(self,touch):
+        if self.collide_point(*touch.pos):
+            self.pressed = touch.pos
+            if touch.is_double_tap:
+                self.click()
+            return True
+        return super(Object, self).on_touch_down(touch)
+
     def click(self):
         app = App.get_running_app()
         OpenObject(app.session.user, self.obj).execute()
